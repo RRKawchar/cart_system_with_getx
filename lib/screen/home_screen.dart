@@ -28,8 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_)async {
-     String cartSave=await box.read(MY_CART_KEY);
-     if(cartSave.isNotEmpty && cartSave.isNotEmpty){
+     var cartSave=await box.read(MY_CART_KEY);
+     if(cartSave!=null && cartSave.isNotEmpty){
        final listCart=jsonDecode(cartSave) as List<dynamic>;
        final listCartParsed=listCart.map((e) => CartModel.fromJson(e)).toList();
        if(listCartParsed.isNotEmpty) controller.cart.value=listCartParsed;
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               var listProduct = snapshot.data as List<ProductModel>;
               return Padding(
                 padding: const EdgeInsets.all(8),
-                child: ListView.builder(
+                child: listProduct.length==0?const Center(child: Text("No item"),):ListView.builder(
                     itemCount: listProduct.length,
                     itemBuilder: (context, index) {
                       return ProductCard(productModel: listProduct[index]);
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
             showBadge: true,
             badgeColor: Colors.red,
             badgeContent: Text(
-              controller.cart.length > 9 ? '9+' : '${controller.cart.length}',
+              controller.getQuantity() > 9 ? '9+' : '${controller.getQuantity()}',
               style: const TextStyle(
                 color: Colors.white,
               ),

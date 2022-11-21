@@ -16,7 +16,7 @@ class TotalItemWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(text,style: TextStyle(fontWeight: FontWeight.bold,fontSize:isSubTotal ? 20: 16),),
-        Text("\$$value",style: TextStyle(fontWeight: FontWeight.bold,fontSize:isSubTotal ? 20: 16))
+        Text(value,style: TextStyle(fontWeight: FontWeight.bold,fontSize:isSubTotal ? 20: 16))
       ],
     );
   }
