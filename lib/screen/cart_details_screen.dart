@@ -27,7 +27,7 @@ class CartDetailsScreen extends StatelessWidget {
 
         actions: [
           InkWell(
-            child: Icon(Icons.clear),
+            child:const Icon(Icons.clear),
             onTap: () {
               controller.cart.clear();
               deleteCart();
